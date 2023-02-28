@@ -8,9 +8,6 @@
     <title>Index</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
@@ -20,53 +17,74 @@
 
     <!-- Section Navbar -->
     <section>
-        <nav class="navbar navbar-expand-md bg-body-tertiary fixed-top">
+        <nav id="nav-scroll" class="navbar navbar-expand-lg fixed-top">
             <div class="container">
-                <div class="navbar-brand">
-                    <a href="">
-                        <img src="assets/image/logo.png" alt="">
-                    </a>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <ul class="navbar-nav text-header justify-content-end">
-                            <li class="nav-item me-2">
-                                <a href="" class="nav-link"> เข้าสู่ระบบ</a>
-                            </li>
-                            <li style="font-size: 25px; margin-right: 10px;">|</li>
-                            <li class="nav-item me-2">
-                                <a href="" class="nav-link"> สมัครสมาชิก</a>
-                            </li>
-                            <li><i class="bi bi-bell"></i></li>
-                        </ul>
-                        <ul class="navbar-nav text-header">
-                            <li class="nav-item me-5">
-                                <a href="" class="nav-link"> หน้าแรก</a>
-                            </li>
-                            <li class="nav-item me-5">
-                                <a href="" class="nav-link"> ประวัติการซื้อ</a>
-                            </li>
-                            <li class="nav-item me-5">
-                                <a href="" class="nav-link"> เปลี่ยนแปลงตั๋ว</a>
-                            </li>
-                            <li class="nav-item me-5">
-                                <a href="" class="nav-link"> ยกเลิกตั๋วโดยสาร</a>
-                            </li>
-                            <li class="nav-item me-5">
-                                <a href="" class="nav-link"> สิทธิพิเศษ</a>
-                            </li>
-                            <li class="nav-item me-5">
-                                <a href="" class="nav-link"> ศูนย์ความช่วยเหลือ</a>
-                            </li>
-
-
-                        </ul>
-
+                <div class="row" style="width: 100%; margin: auto; align-items: center;">
+                    <div class="col-12 col-md-2 col-lg-2">
+                        <div class="navbar-brand">
+                            <a href="">
+                                <img id="logo-scroll" class="logo" src="assets/image/logo.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-10 col-lg-10">
+                        <div class="clearfix">
+                            <div class="float-end">
+                                <ul class="navbar-nav">
+                                    <li>
+                                        <div class="nav-link">
+                                            <img src="assets/image/icon3.png" alt="">
+                                            <span class="text-header">
+                                                <a href="">เข้าสู่ระบบ</a>
+                                                <span style="font-size: 25px;">|</span>
+                                                <a href="">สมัครสมาชิก</a>
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="position-login nav-link">
+                                            <a href="">
+                                                <img src="assets/image/icon-alert.png" alt="">
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <ul class="navbar-nav text-header ">
+                                <li><a href="" class="nav-link"> หน้าแรก</a></li>
+                                <li><a href="" class="nav-link"> ประวัติการซื้อ</a></li>
+                                <li><a href="" class="nav-link"> เปลี่ยนแปลงตั๋ว</a></li>
+                                <li><a href="" class="nav-link"> ยกเลิกตั๋วโดยสาร</a></li>
+                                <li><a href="" class="nav-link"> สิทธิพิเศษ</a></li>
+                                <li><a href="" class="nav-link"> ศูนย์ความช่วยเหลือ</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </nav>
     </section>
+    <!-- Section detail -->
+    <section>
+        <div class="bg-detail">
+            <div class="container">
+            </div>
+        </div>
+        </div>
+
+    </section>
+    <!-- Section recommend -->
+    <section>
+
+    </section>
+    <!-- Foot -->
+    <script src="assets/js/navbar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+        </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.0/mdb.min.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,117 @@
-.text-header > li > a {
-    font-size: 20px;
+@import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
+
+/* สีหลัก 196, 138, 14 */
+* {
+    box-sizing: border-box;
+    font-family: 'Sarabun', sans-serif;
+}
+
+/* navbar */
+.scroll-class {
+    transition: 0.6s;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.logo.scroll_ {
+    height: 120px;
+}
+
+.logo {
+    height: 150px;
+    transition: 0.5s;
+}
+
+.text-header>li>a:hover {
+    background: rgb(186, 138, 14);
+    color: white;
+    border-radius: 10px;
+}
+
+.text-header>a {
+    border-radius: 5px;
+    color: black;
+    text-decoration: none;
+}
+
+/* response breakpoint */
+/* 
+    xs: 0;
+    sm: 576px;
+    md: 768px;
+    lg: 992px;
+    xl: 1200px;
+    xxl: 1400px;
+*/
+@media (min-width: 768px) {
+    .text-header>li>a {
+        font-size: 0.8rem;
+        border-radius: 5px;
+        margin-left: 4px;
+    }
+
+    .position-login {
+        margin-top: 9px;
+    }
+
+    .text-header>a {
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 992px) {
+    .text-header>li>a {
+        font-size: 1.1rem;
+        border-radius: 5px;
+        margin-left: 10px;
+    }
+
+    .position-login {
+        margin-top: 9px;
+    }
+
+    .text-header>a {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .text-header>li>a {
+        font-size: 1.3rem;
+        border-radius: 5px;
+        margin-left: 12px;
+    }
+
+    .position-login {
+        margin-right: 40px;
+        margin-top: 8px;
+    }
+
+    .text-header>a {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .text-header>li>a {
+        font-size: 1.5rem;
+        border-radius: 5px;
+        margin-left: 15px;
+    }
+
+    .position-login {
+        margin-right: 55px;
+        margin-top: 8px;
+    }
+
+    .text-header>a {
+        font-size: 20px;
+    }
+}
+
+
+
+.bg-detail {
+    background-image: url(/assets/image/bg-head.png);
+    height: 945px;
 }
