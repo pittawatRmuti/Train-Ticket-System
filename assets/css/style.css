@@ -94,7 +94,7 @@
 
 @media (min-width: 1400px) {
     .text-header>li>a {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         border-radius: 5px;
         margin-left: 15px;
     }
@@ -109,9 +109,149 @@
     }
 }
 
+/* detail */
+.bg-head {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
 
+.bg-head>img {
+    width: 100%;
+}
 
-.bg-detail {
-    background-image: url(/assets/image/bg-head.png);
-    height: 945px;
+.bg-head>h1 {
+    color: #991c20;
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    font-size: 65px;
+    font-weight: bold;
+}
+
+.bg-head>h3 {
+    color: #991c20;
+    position: absolute;
+    top: 35%;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.detail {
+    position: absolute;
+    top: 550px;
+    left: 60px;
+    right: 100px;
+    background-color: white;
+    border-radius: 20px;
+    width: 1200px;
+    height: 250px;
+}
+
+.detail>div>div>h2 {
+    padding: 5px;
+    margin-top: 5px;
+    font-size: 30px;
+}
+
+.hr-detail {
+    width: 100%;
+    border-bottom: 3px solid #c48a0e;
+    margin: 16px 0px 32px;
+}
+
+/* จองตั๋วรถไฟ */
+.detail>div {
+    padding-top: 24px;
+    padding-left: 36px;
+    padding-right: 36px;
+}
+
+.select-style>select {
+    font-size: 20px;
+    width: 170px;
+    height: 50px;
+    border: 2px solid #c48a0e;
+    border-radius: 9px;
+    padding: 6px 12px;
+    margin-top: 0px;
+    margin-left: 0;
+    margin-right: 0px;
+    color: #c48a0e;
+}
+
+.bt-con>button {
+    width: 100%;
+    height: 50px;
+    padding: 6px 12px;
+    margin-top: 0px;
+    margin-left: 0;
+    margin-right: 0px;
+    font-size: 20px;
+    border: 2px solid #c48a0e;
+    border-radius: 9px;
+    color: white;
+    background: #c48a0e;
+}
+
+.switch {
+    width: 50px;
+    height: 25px;
+    position: relative;
+    display: inline-block;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #ccc;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    width: 20px;
+    height: 20px;
+    left: 4px;
+    bottom: 3px;
+    background: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider::before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }
