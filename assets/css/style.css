@@ -57,7 +57,19 @@
     .text-header>a {
         font-size: 13px;
     }
+
+    /* Section detail */
+    /* .bg-head>h1 {
+        top: 20%;
+        font-size: 55px;
+    }
+
+    .bg-head>h3 {
+        top: 30%;
+        font-size: 60px;
+    } */
 }
+
 
 @media (min-width: 992px) {
     .text-header>li>a {
@@ -72,6 +84,29 @@
 
     .text-header>a {
         font-size: 16px;
+    }
+
+    /* Section detail */
+    .bg-head>h1 {
+        top: 20%;
+        font-size: 50px;
+    }
+
+    .bg-head>h3 {
+        top: 30%;
+        font-size: 30px;
+    }
+    .detail-box {
+        width: 100%;
+    }
+
+    .content-bg {
+        top: 50%;
+    }
+
+
+    .select-style>select {
+        width: 100px;
     }
 }
 
@@ -90,6 +125,34 @@
     .text-header>a {
         font-size: 20px;
     }
+
+    /* Section detail */
+    .bg-head>h1 {
+        top: 25%;
+        font-size: 60px;
+    }
+
+    .bg-head>h3 {
+        top: 35%;
+        font-size: 30px;
+    }
+
+    .bg-head>img {
+        width: 100%;
+    }
+
+    .detail-box {
+        width: 100%;
+    }
+
+    .content-bg {
+        top: 45%;
+    }
+
+
+    .select-style>select {
+        width: 160px;
+    }
 }
 
 @media (min-width: 1400px) {
@@ -100,61 +163,75 @@
     }
 
     .position-login {
-        margin-right: 55px;
+        margin-right: 110px;
         margin-top: 8px;
     }
 
     .text-header>a {
         font-size: 20px;
     }
+
+    /* Section detail */
+    .bg-head>h1 {
+        top: 30%;
+        font-size: 65px;
+    }
+
+    .bg-head>h3 {
+        top: 40%;
+        font-size: 30px;
+    }
+
+    .bg-head>img {
+        width: 100%;
+    }
+
+    .detail-box {
+        width: 100%;
+    }
+
+    .content-bg {
+        top: 60%;
+    }
+
+    .select-style>select {
+        width: 170px;
+    }
 }
 
-/* detail */
+/* Section detail */
+
 .bg-head {
     position: relative;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.bg-head>img {
-    width: 100%;
 }
 
 .bg-head>h1 {
     color: #991c20;
     position: absolute;
-    top: 25%;
     width: 100%;
     text-align: center;
-    font-size: 65px;
     font-weight: bold;
 }
 
 .bg-head>h3 {
     color: #991c20;
     position: absolute;
-    top: 35%;
     width: 100%;
     text-align: center;
-    font-size: 30px;
     font-weight: bold;
 }
 
-.detail {
+.content-bg {
     position: absolute;
-    top: 550px;
-    left: 60px;
-    right: 100px;
-    background-color: white;
-    border-radius: 20px;
-    width: 1200px;
-    height: 250px;
+    width: 100%;
 }
 
-.detail>div>div>h2 {
-    padding: 5px;
-    margin-top: 5px;
-    font-size: 30px;
+.detail-box {
+    background: white;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
 }
 
 .hr-detail {
@@ -164,7 +241,7 @@
 }
 
 /* จองตั๋วรถไฟ */
-.detail>div {
+.detail-box>div>h2 {
     padding-top: 24px;
     padding-left: 36px;
     padding-right: 36px;
@@ -172,17 +249,29 @@
 
 .select-style>select {
     font-size: 20px;
-    width: 170px;
     height: 50px;
     border: 2px solid #c48a0e;
     border-radius: 9px;
+    padding: 10px;
+    margin: 0;
+    color: #c48a0e;
+}
+
+.bt-con>button {
+    width: 100%;
+    height: 50px;
     padding: 6px 12px;
     margin-top: 0px;
     margin-left: 0;
     margin-right: 0px;
-    color: #c48a0e;
+    font-size: 20px;
+    border: 2px solid #c48a0e;
+    border-radius: 9px;
+    color: white;
+    background: #c48a0e;
 }
 
+/* ToggelButton */
 .bt-con>button {
     width: 100%;
     height: 50px;
@@ -254,4 +343,23 @@ input:checked+.slider::before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+
+
+/*Section recommend*/
+.bg-recommend {
+    background-image: url(/assets/image/bg2.png);
+    width: 100%;
+}
+
+.text-sell {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.bg-recommend>div>div>h2 {
+    font-size: 20px;
+    padding: 10px;
+    margin-top: 20px;
 }
