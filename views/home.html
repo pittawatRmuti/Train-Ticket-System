@@ -35,7 +35,8 @@
                                         <div class="nav-link">
                                             <img src="assets/image/icon3.png" alt="">
                                             <span class="text-header">
-                                                <a href="">เข้าสู่ระบบ</a>
+                                                <a href="" data-bs-target="#login-form"
+                                                    data-bs-toggle="modal">เข้าสู่ระบบ</a>
                                                 <span style="font-size: 25px;">|</span>
                                                 <a href="" data-bs-target="#register-form"
                                                     data-bs-toggle="modal">สมัครสมาชิก</a>
@@ -70,6 +71,7 @@
     </section>
     <!-- Action Register / login  -->
     <section>
+        <!-- Register -->
         <div class="container">
             <div class="modal" id="register-form">
                 <div class="modal-dialog">
@@ -113,6 +115,34 @@
                                 up</button>
                             <div class="footer-login">
                                 <span>มีบัญชีอยู่แล้ว ? </span><a href="">เข้าสู่ระบบ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Login -->
+        <div class="container">
+            <div class="modal" id="login-form">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100">เข้าสู่ระบบ</h4>
+                            <button class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body text-form">
+                            <div class="md-form mb-3">
+                                <input type="text" id="register_id" placeholder="อีเมล" class="form-control validate">
+                            </div>
+                            <div class="md-form mb-3">
+                                <input type="text" id="register_id" placeholder="รหัสผ่าน"
+                                    class="form-control validate">
+                            </div>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center border-top-0">
+                            <button type="button" class="btn-rgt">Login</button>
+                            <div class="footer-login">
+                                <span>ยังไม่มีบัญชี ? </span><a href="">สมัครสมาชิก</a>
                             </div>
                         </div>
                     </div>
