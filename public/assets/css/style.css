@@ -388,3 +388,57 @@ input:checked+.slider::before {
 .footer-login {
     font-size: 20px;
 }
+
+.step-booking {
+    padding: 5% 0;
+    background: white;
+    height: 400px;
+    display: flex;
+    align-items: end;
+    text-align: center;
+}
+
+.show-route {
+    padding: 5% 0;
+    background: #f1f1f1;
+    height: 350px;
+}
+
+.text-route>h5 {
+    font-size: 1.8rem;
+}
+
+.text-route>p>span {
+    font-size: 20px;
+    color: #c48a0e;
+}
+
+.text-route>h5>span {
+    font-size: 1.8rem;
+    color: #c48a0e;
+}
+
+.content-route-show {
+    background-color: white;
+    padding: 2rem 2rem;
+    height: 100px;
+    margin: 2rem auto 0;
+    border: 1px solid #ffff;
+    border-radius: 5px;
+}
+
+.content-route-show>div>h3>span>a {
+    background: rgb(186, 138, 14);
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin-left: 15px;
+    font-size: 20px;
+}
+
+.content-route-show>div>h3>span>a:hover {
+    background: #f1f1f1;
+    color: black;
+    border: #c48a0e 1.5px solid;
+}
