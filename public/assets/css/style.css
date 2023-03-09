@@ -379,6 +379,13 @@ input:checked+.slider::before {
     border-radius: 5px;
 }
 
+.btn-rgt:hover {
+    background: #f1f1f1;
+    color: black;
+    border: #c48a0e 2.5px solid;
+    border-radius: 5px;
+}
+
 .footer-login>a {
     font-size: 20px;
     text-decoration: none;
@@ -427,7 +434,7 @@ input:checked+.slider::before {
     border-radius: 5px;
 }
 
-.content-route-show>div>h3>span>a {
+.content-route-show>div>h5>span>a {
     background: rgb(186, 138, 14);
     color: white;
     border-radius: 10px;
@@ -437,8 +444,76 @@ input:checked+.slider::before {
     font-size: 20px;
 }
 
-.content-route-show>div>h3>span>a:hover {
+.content-route-show>div>h5>span>a:hover {
     background: #f1f1f1;
     color: black;
-    border: #c48a0e 1.5px solid;
+    border: #c48a0e 2px solid;
+}
+
+.con-order {
+    padding: 5% 0;
+    margin-top: 70px;
+}
+
+.content-order {
+    height: 100%;
+    width: 90vh;
+    background: white;
+    padding: 3% 0;
+    margin: 2% 0;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 15px;
+}
+
+.content-order>div>hr {
+    width: 70vh;
+    margin: auto;
+}
+
+.content-order>div>h3 {
+    margin: 2.5% 0;
+}
+
+.confirm>button {
+    background: rgb(186, 138, 14);
+    color: white;
+    border: #ccc solid 1px;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 10px 35px;
+    margin-left: 15px;
+    font-size: 1.5rem;
+
+}
+
+.confirm>button:hover {
+    background: #f1f1f1;
+    color: black;
+    border: #c48a0e 2px solid;
+}
+
+.text-order>h3>span {
+    color: #c48a0e;
+}
+
+.text-order>h5>span {
+    color: #c48a0e;
+}
+
+.cancel-btn>button {
+    background: rgb(186, 138, 14);
+    color: white;
+    border: #ccc solid 1px;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 10px 10px;
+    margin-left: 15px;
+    margin-top: 5px;
+    font-size: 1.1rem;
+}
+
+.cancel-btn>button:hover {
+    background: #f1f1f1;
+    color: black;
+    border: #c48a0e 2px solid;
 }

@@ -3,7 +3,6 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mysql = require('mysql')
 const session = require('express-session')
-const e = require('express')
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -38,50 +37,17 @@ let ses
 let origin
 let goal
 let F_route
+let dateTime
+let travel
 
-// app.get('/', (req, res) => {
-//     res.redirect('/index')
-// })
+let dataForm_customer
+let amount
+let dataConfirm
+let travelId
+let idcard
 
-// function getRoute(route_data) {
-//     return new Promise(function (reslove, reject) {
-//         console.log('route_data : ', route_data)
-//         if (!route_data) {
-//             reslove(route_data = 5)
-//             console.log('route_data is : ', route_data)
-//         } else {
-//             reject(console.log('route_data is : ', route_data))
-//         }
-//     })
-// }
-
-// app.get('/testPage', (req, res) => {
-//     return new Promise(function (reslove, reject) {
-//         con.getConnection((err, connecttion) => {
-//             if (err) throw err
-//             console.log('connected id : ', connecttion.threadId)
-//             connecttion.query('SELECT * FROM route', (err, data) => {
-//                 connecttion.release()
-//                 if (!err) {
-//                     route_data = { data: data, Error: err }
-//                     console.log(route_data)
-//                     console.log('getRoute data is success')
-//                     reslove(res.redirect('/index'))
-//                 } else {
-//                     reject(console.log(err))
-//                 }
-//             })
-//         })
-//     })
-// })
-// async function Checkcon(route_data) {
-//     app.get('/homePage', (req, res) => {
-//         Checkcon(route_data)
-//     })
-// }
-// app.get('/homePage', (req, res) => {
-//     Checkcon(route_data)
-// })
+let orderHis
+let orderCancel
 app.get('/index', (req, res) => {
 
     con.getConnection((err, connecttion) => {
@@ -98,31 +64,23 @@ app.get('/index', (req, res) => {
             }
         })
     })
-    // req.session.loggedin = (req.session.loggedin) ? res.render('home', login_data) : res.render('home', { ses: ses = false })
 
-    // if (req.session.loggedin) {
-    //     res.render('home', login_data)
-    // } else {
-    //     res.render('home', { ses: ses = false })
-    // }
-    // console.log(route_data)
-    // console.log(ses)
 
 })
 app.get('/home', (req, res) => {
 
     if (req.session.loggedin) {
-        res.render('home', { login_data: login_data, routedata: routedata, ses: ses = true })
+        res.render('home', { login_data: login_data, routedata: routedata, orderHis: orderHis, ses: ses = true })
     } else {
         res.render('home', { routedata: routedata, ses: ses = false })
     }
 })
 // ข้อมูลทดสอบสมัครสมาชิก
 /*
-1919800275640
+1212123123121
 เทพ
 โพธฺงาม
-0612347895
+0666666666
 mopuyy3333@gmail.com
 ไทย
 123456
@@ -159,7 +117,6 @@ app.get('/logout', (req, res) => {
     req.session.destroy()
     res.redirect('/index')
 })
-
 app.post('/login', (req, res) => {
     username = req.body.Email
     password = req.body.Password
@@ -178,7 +135,6 @@ app.post('/login', (req, res) => {
         })
     }
 })
-
 app.get('/loggedin', (req, res) => {
 
     if (req.session.loggedin) {
@@ -190,7 +146,7 @@ app.get('/loggedin', (req, res) => {
                 if (!err) {
                     login_data = data
                     // console.log(login_data)
-                    res.redirect('/index')
+                    res.redirect('/historyOrder')
                 } else {
                     console.log(err)
                 }
@@ -202,25 +158,19 @@ app.get('/loggedin', (req, res) => {
     }
 
 })
+// route
+app.post('/home_checkST', (req, res) => {
 
-// app.get('/test_select', (req, res) => {
+    if (!req.session.loggedin) {
+        res.send('<script>alert("Please login first."); window.location.href="/home";</script>')
+    } else {
+        origin = req.body.Source
+        goal = req.body.Destination
+        res.redirect('/select_post')
+    }
+})
+app.get('/select_post', (req, res) => {
 
-//     con.getConnection((err, connecttion) => {
-//         if (err) throw err
-//         console.log('connected id : ', connecttion.threadId)
-//         connecttion.query('SELECT * FROM route', (err, data) => {
-//             connecttion.release()
-//             if (!err) {
-//                 res.render('test', { data: data })
-//             } else {
-//                 console.log(err)
-//             }
-//         })
-//     })
-// })
-app.post('/select_post', (req, res) => {
-    origin = req.body.Source
-    goal = req.body.Destination
     console.log(origin)
     console.log(goal)
     con.getConnection((err, connecttion) => {
@@ -229,9 +179,9 @@ app.post('/select_post', (req, res) => {
         connecttion.query('SELECT * FROM `route` WHERE `Source` = ? AND `Destination` = ?', [origin, goal], (err, data) => {
             connecttion.release()
             if (!err) {
-                console.log(data)
                 F_route = data
-                res.redirect('show_route')
+                console.log(F_route)
+                res.redirect('train_route')
             } else {
                 console.log(err)
             }
@@ -239,13 +189,111 @@ app.post('/select_post', (req, res) => {
     })
 
 })
+app.get('/train_route', (req, res) => {
+    F_route.forEach(function (item) {
+        // console.log(item.Path_ID)
+        Path_id = item.Path_ID
+    })
+    con.getConnection((err, connecttion) => {
+        if (err) throw err
+        console.log('connected id : ', connecttion.threadId)
+        connecttion.query('SELECT * FROM train_schedule WHERE `Path_ID` = ?', Path_id, (err, data) => {
+            connecttion.release()
+            if (!err) {
+                travel = data
+                data.forEach(function (item) {
+                    const datastring = new Date(item.Time_Date)
+                    dateTime = datastring.toLocaleDateString()
+                })
+                res.redirect('/show_route')
+            } else {
+                console.log(err)
+            }
+        })
+    })
+})
 // SELECT * FROM `route` WHERE `Source` = ? AND `Destination` = ?
 app.get('/show_route', (req, res) => {
     if (req.session.loggedin) {
-        res.render('show_route', { login_data: login_data, F_route: F_route, ses: ses = true })
+        res.render('show_route', { login_data: login_data, dateTime: dateTime, F_route: F_route, origin: origin, goal: goal, ses: ses = true })
     } else {
-        res.render('show_route', { F_route: F_route, ses: ses = false })
+        res.render('show_route', { F_route: F_route, dateTime: dateTime, origin: origin, goal: goal, ses: ses = false })
     }
+})
+//add form customer
+app.post('/addform_customer', (req, res) => {
+    dataForm_customer = req.body
+    amount = req.body.amount
+    console.log(amount)
+    res.redirect('/Order')
+})
+app.get('/Order', (req, res) => {
+    console.log(F_route)
+    res.render('order', { login_data: login_data, dateTime: dateTime, F_route: F_route, amount: amount, ses: ses = true })
+})
+app.post('/confirmOrder', (req, res) => {
+    travel.forEach(function (data) {
+        travelId = data.Travel_Id
+    })
+    login_data.forEach(function (data) {
+        idCard = data.Id_Card
+    })
+    dataConfirm = { Amount: amount, Travel_Id: travelId, Id_Card: idCard }
+    res.redirect('/sendOrder')
+})
+app.get('/sendOrder', (req, res) => {
+    console.log(dataConfirm)
+    con.getConnection((err, connecttion) => {
+        if (err) throw err
+        connecttion.query('INSERT INTO purchase_order SET ?', dataConfirm, (err, rows) => {
+            connecttion.release()
+            if (!err) {
+                res.send('<script>;setTimeout(function(){alert("จองตั๋วสำเร็จ!");window.location.href="/historyOrder";}, 1000);</script>');
+            } else {
+                console.log(err)
+            }
+        })
+
+    })
+})
+// history order
+// ตัวอย่างคำสั่ง JOIN ตาราง
+/* 
+SELECT purchase_order.Order_Id,purchase_order.Amount,customer.First_Name,customer.Last_Name,train_schedule.Time_Date,route.Source,route.Destination FROM purchase_order JOIN customer ON purchase_order.Id_Card = customer.Id_Card JOIN train_schedule ON purchase_order.Travel_Id = train_schedule.Travel_Id JOIN route ON train_schedule.Path_ID = route.Path_ID;
+*/
+app.get('/historyOrder', (req, res) => {
+    login_data.forEach(function (data) {
+        idcard = data.Id_Card
+    })
+    con.getConnection((err, connecttion) => {
+        if (err) throw err
+        console.log('connected id : ', connecttion.threadId)
+        connecttion.query('SELECT purchase_order.Order_Id,purchase_order.Amount,customer.First_Name,customer.Last_Name,train_schedule.Time_Date,route.Source,route.Destination FROM purchase_order JOIN customer ON purchase_order.Id_Card = customer.Id_Card JOIN train_schedule ON purchase_order.Travel_Id = train_schedule.Travel_Id JOIN route ON train_schedule.Path_ID = route.Path_ID WHERE customer.Id_Card = ?', idcard, (err, data) => {
+            connecttion.release()
+            if (!err) {
+                orderHis = data
+                res.redirect('/index')
+            } else {
+                console.log(err)
+            }
+        })
+    })
+})
+// cancel
+app.post('/cancelOrder', (req, res) => {
+    con.getConnection((err, connecttion) => {
+        if (err) throw err
+        console.log('connect id : ?', connecttion.threadId)
+        //ลบข้อมูล โดยใช้ ้ id
+        connecttion.query('DELETE FROM `purchase_order` WHERE `Order_Id`= ?', req.body.orderid, (err, rows) => {
+            connecttion.release()
+            if (!err) {
+                res.send('<script>;setTimeout(function(){alert("ยกเลิกตั๋วสำเร็จ!");window.location.href="/historyOrder";}, 1000);</script>');
+            } else {
+                console.log(err)
+            }
+        })
+    })
 })
 
 
