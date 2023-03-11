@@ -1,14 +1,16 @@
-
+//npm i method-override --save
 const express = require('express')
 const bodyParser = require('body-parser')
 const mysql = require('mysql')
 const session = require('express-session')
+const methodOverride = require('method-override')
 
 const app = express()
 const port = process.env.PORT || 5000
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(methodOverride('_method'))
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
@@ -27,16 +29,12 @@ const con = mysql.createPool({
     database: 'train_ticket'
 })
 
-let username
-let password
+let username, password
 
-let login_data
-let routedata
+let login_data, routedata
 let ses
 
-let origin
-let goal
-let F_route
+let origin, goal, F_route
 let dateTime
 let travel
 
@@ -48,6 +46,8 @@ let idcard
 
 let orderHis
 let orderCancel
+let changeID
+let statusChange = false
 app.get('/index', (req, res) => {
 
     con.getConnection((err, connecttion) => {
@@ -99,8 +99,8 @@ app.post('/register', (req, res) => {
                     connecttion.query('INSERT INTO customer SET ?', params, (err, data) => {
                         connecttion.release()
                         if (!err) {
-                            res.redirect('/index')
-                            console.log('Register Succuss!')
+                            res.send('<script>;setTimeout(function(){alert("เปลี่ยนตั๋วสำเร็จ!");window.location.href="/index";}, 1000);</script>')
+
                         } else {
                             console.log(err)
                         }
@@ -160,14 +160,10 @@ app.get('/loggedin', (req, res) => {
 })
 // route
 app.post('/home_checkST', (req, res) => {
-
-    if (!req.session.loggedin) {
-        res.send('<script>alert("Please login first."); window.location.href="/home";</script>')
-    } else {
-        origin = req.body.Source
-        goal = req.body.Destination
-        res.redirect('/select_post')
-    }
+    origin = req.body.Source
+    goal = req.body.Destination
+    statusChange = false
+    res.redirect('/select_post')
 })
 app.get('/select_post', (req, res) => {
 
@@ -205,7 +201,11 @@ app.get('/train_route', (req, res) => {
                     const datastring = new Date(item.Time_Date)
                     dateTime = datastring.toLocaleDateString()
                 })
-                res.redirect('/show_route')
+                if (statusChange == true) {
+                    res.redirect('/conchangeOrder')
+                } else {
+                    res.redirect('/show_route')
+                }
             } else {
                 console.log(err)
             }
@@ -229,7 +229,7 @@ app.post('/addform_customer', (req, res) => {
 })
 app.get('/Order', (req, res) => {
     console.log(F_route)
-    res.render('order', { login_data: login_data, dateTime: dateTime, F_route: F_route, amount: amount, ses: ses = true })
+    res.render('order', { login_data: login_data, dateTime: dateTime, F_route: F_route, amount: amount, statusChange: statusChange, ses: ses = true })
 })
 app.post('/confirmOrder', (req, res) => {
     travel.forEach(function (data) {
@@ -239,7 +239,9 @@ app.post('/confirmOrder', (req, res) => {
         idCard = data.Id_Card
     })
     dataConfirm = { Amount: amount, Travel_Id: travelId, Id_Card: idCard }
+
     res.redirect('/sendOrder')
+
 })
 app.get('/sendOrder', (req, res) => {
     console.log(dataConfirm)
@@ -296,6 +298,47 @@ app.post('/cancelOrder', (req, res) => {
     })
 })
 
+// change order
+app.post('/changeOrder', (req, res) => {
+    changeID = req.body.orderid
+    res.render('changeOrder', { login_data: login_data, routedata: routedata, dateTime: dateTime, F_route: F_route, orderHis: orderHis, origin: origin, goal: goal, travel, ses: ses = true, statusChange: statusChange })
+})
+app.post('/change_order', (req, res) => {
+    origin = req.body.Source
+    goal = req.body.Destination
+    statusChange = true
+    res.redirect('/select_post')
+})
+app.get('/conchangeOrder', (req, res) => {
+    res.render('changeOrder', { login_data: login_data, routedata: routedata, dateTime: dateTime, F_route: F_route, origin: origin, goal: goal, orderHis: orderHis, travel: travel, ses: ses = true, statusChange: statusChange })
+})
+app.post('/updateorder', (req, res) => {
+    dataForm_customer = req.body
+    amount = req.body.amount
+    res.redirect('/Order')
+})
+app.put('/update_Order', (req, res) => {
+    travel.forEach(function (data) {
+        travelId = data.Travel_Id
+    })
+    login_data.forEach(function (data) {
+        idCard = data.Id_Card
+    })
+    dataConfirm = { Amount: amount, Travel_Id: travelId, Id_Card: idCard }
+    const testdata = { amount, travelId, idcard, changeID }
+    console.log(testdata)
+    con.getConnection((err, connecttion) => {
+        console.log('connect id : ?', connecttion.threadId)
+        connecttion.query('UPDATE purchase_order SET Amount = ?,Travel_Id = ?,Id_Card = ? WHERE Order_Id = ?', [amount, travelId, idCard, changeID], (err, rows) => {
+            connecttion.release()
+            if (!err) {
+                res.send('<script>;setTimeout(function(){alert("เปลี่ยนตั๋วสำเร็จ!");window.location.href="/historyOrder";}, 1000);</script>');
+            } else {
+                console.log(err)
+            }
+        })
+    })
+})
 
 // Openserver
 app.listen(port, () => {

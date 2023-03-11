@@ -406,9 +406,13 @@ input:checked+.slider::before {
 }
 
 .show-route {
-    padding: 5% 0;
-    background: #f1f1f1;
+    padding: 2% 0;
+    margin: 10px 0;
+    background: white;
     height: 350px;
+    border: #e1e1e1 solid 1px;
+    border-radius: 15px;
+
 }
 
 .text-route>h5 {
@@ -426,7 +430,7 @@ input:checked+.slider::before {
 }
 
 .content-route-show {
-    background-color: white;
+    background-color: #f8f6f3;
     padding: 2rem 2rem;
     height: 100px;
     margin: 2rem auto 0;

@@ -16,5 +16,4 @@ function scrollFunction() {
     }
 }
 
-
 scrollFunction() 

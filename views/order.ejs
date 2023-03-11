@@ -177,11 +177,20 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="text-route text-center">
-                            <h2>ยืนยันรายการจองตั๋ว</h2>
+                            
+                            <% if(statusChange == true){ %>
+                                <h2>ยืนยันรายการเปลี่ยนตั๋ว</h2>
+                            <% }else{ %>
+                                <h2>ยืนยันรายการจองตั๋ว</h2>
+                            <% } %>
                         </div>
                     </div>
                 </div>
-                <form action="confirmOrder" method="post">
+                <% if(statusChange == true){ %>
+                    <form  action="/update_Order?_method=PUT" method="post" >
+                <% }else{ %>
+                    <form action="confirmOrder" method="post">
+                <% } %>
                     <div class="row justify-content-center">
                         <div class="col-12 content-order">
                             <div class="text-center text-order">
@@ -214,7 +223,7 @@
                             </div>
                         </div>
                         <div class="col-12 text-center confirm">
-                            <button type="submit" onclick="return confirm('ยืนยันการจองหรือไม่?')">ยืนยัน</button>
+                            <button type="submit" onclick="return confirm('ยืนยันรายการหรือไม่?')">ยืนยัน</button>
                         </div>
                     </div>
                 </form>
